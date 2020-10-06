@@ -15,6 +15,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from .models import Choice, Question
 
+
+
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {
@@ -49,4 +51,13 @@ def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
 
+def add(request):
+    if request.method == 'POST':
+        if request.POST.get('q'):
+            selected_choice = Question(question_text=request.POST.get('q'))
+            selected_choice.save()
+            return HttpResponseRedirect(reverse('polls:index'))
+
+    else:
+        return render(request, 'polls/add.html')
 
