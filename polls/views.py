@@ -53,8 +53,8 @@ def results(request, question_id):
 
 def add(request):
     if request.method == 'POST':
-        if request.POST.get('q'):
-            selected_choice = Question(question_text=request.POST.get('q'))
+        if request.POST.get('NewQuestion'):
+            selected_choice = Question(question_text=request.POST.get('NewQuestion'))
             selected_choice.save()
             return HttpResponseRedirect(reverse('polls:index'))
 
