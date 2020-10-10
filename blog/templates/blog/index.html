@@ -1,10 +1,20 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<ul><p><font size = "+2" color = "blue">List Posts that Is_Published = True</font></p></ul>
 {% load static %}
 
 {% if latest_question_post %}
     <ul>
         {% for post in latest_question_post %}
             {% if post.is_published == True %}
-                <li><a href="/blog/{{ post.id }}/">{{ post.title }}</a></li>
+                <ul><li style="font-size: 35px";><a href="/blog/{{ post.id }}/">{{ post.title }}</a></li></ul><br>
             {% endif %}
         {% endfor %}
     </ul>
@@ -12,4 +22,8 @@
 {% else %}
     <p>No posts are available.</p>
 {% endif %}
+
+
+</body>
+</html>
 
