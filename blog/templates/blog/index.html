@@ -1,0 +1,15 @@
+{% load static %}
+
+{% if latest_question_post %}
+    <ul>
+        {% for post in latest_question_post %}
+            {% if post.is_published == True %}
+                <li><a href="/blog/{{ post.id }}/">{{ post.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <p>No posts are available.</p>
+{% endif %}
+
