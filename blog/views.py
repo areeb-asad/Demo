@@ -6,6 +6,10 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from .models import post
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import PostSerializer
+
 
 class IndexView(generic.ListView):
     template_name = 'blog/index.html'
@@ -16,6 +20,15 @@ class IndexView(generic.ListView):
 
         return post.objects.filter(is_published=True).order_by('-pub_date')[:5]
 
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Questions to be viewed or edited.
+    """
+    queryset = post.objects.order_by('-pub_date')[:5]
+    serializer_class = PostSerializer
+    permission_classes = [permissions.AllowAny]
 
 class DetailView(generic.DetailView):
     model = post

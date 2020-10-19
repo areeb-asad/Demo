@@ -14,7 +14,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from .models import Choice, Question
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import QuestionSerializer
 
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Questions to be viewed or edited.
+    """
+    queryset = Question.objects.order_by('-pub_date')[:5]
+    serializer_class = QuestionSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 def index(request):
